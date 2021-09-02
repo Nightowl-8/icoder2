@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://cdn.plot.ly/plotly-2.3.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style-login.css">
+</head>
+<body>
+    
+  <nav class="navbar  justify-content-between">
+    <a class="navbar-brand text-light fw-normal">iCoder</a>
+    <form class="form-inline">
+      
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text material-icons" id="basic-addon1">email</span>
+        </div>
+        <input type="text" class="form-control login-email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text material-icons" id="basic-addon1">lock</span>
+        </div>
+        <input type="password" class="form-control login-password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+      </div>
+      <button class="btn btn-outline-dark my-2 my-sm-0 login-submit" >Login</button>
+    </form>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="login-alert" style="position: absolute; z-index: 999;top:60px;right:50px;">
+      <p id="err-message-login"></p>
+      <button type="button" class="btn-close" id="close1" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+  </nav>
+  
+  <div class="content-container">
+
+    <div class="ad-container-left"></div>
+    <div class="signup-container">
+      <form>
+        <h2>Sign up</h2>
+        
+        <div class="form-group row">
+          <div class="alert alert-danger alert-dismissible fade show input-group" role="alert" id="signup-alert" style="position: relative; z-index: 999;">
+            <p id="err-message-signup"></p>
+            <button type="button" class="btn-close" id="close2" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text material-icons" id="basic-addon1">email</span>
+            </div>
+            <input type="text"  class="form-control user_email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+          </div>
+         
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text material-icons" id="basic-addon1">lock</span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" id="pass1" aria-label="Password" aria-describedby="basic-addon1">
+          </div>
+        
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text material-icons" id="basic-addon1" >password</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Confirm password" aria-label="Confirm password" id="pass2" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text material-icons" id="basic-addon1">code</span>
+          </div>
+          <input type="text" class="form-control cfusername"  placeholder="Codeforces username" aria-label="cfuser" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text material-icons" id="basic-addon1">code</span>
+          </div>
+          <input type="text" class="form-control ccusername" placeholder="Codechef username" aria-label="ccuser" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+          <button  class="btn btn-outline-success signup-submit">Get started</button>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div class="ad-container-right"></div>
+  </div>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+    import { getDatabase,ref,set,onValue,child,get,push,onChildAdded, onChildChanged, onChildRemoved } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js";
+    import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword , updateProfile, updateEmail, updatePassword,sendEmailVerification,sendPasswordResetEmail,deleteUser,reauthenticateWithCredential,signOut} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-Sqki-JHIblUdA17Vx_BW_FNQ3MVFsqQ",
+      authDomain: "icoder-53c49.firebaseapp.com",
+      projectId: "icoder-53c49",
+      storageBucket: "icoder-53c49.appspot.com",
+      messagingSenderId: "865545154128",
+      appId: "1:865545154128:web:ee71656648a4771628ab55"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db= getDatabase(app);
+    const auth = getAuth(app);
+    function getemail(emailaddress){
+      var ans="";
+      for(var i=0;i<emailaddress.length;i++){
+          if(emailaddress[i]==='@')break;
+          else ans+=emailaddress[i];
+      }
+      return ans;
+  }
+    function resetform(){
+      document.querySelector('#pass1').value;
+      document.querySelector('#pass2').value;
+      document.querySelector('.cfusername').value;
+      document.querySelector('.ccusername').value;
+      document.querySelector('.user_email').value;
+  }
+    document.querySelector('.login-submit').addEventListener('click',e=>{
+      e.preventDefault();
+      console.log('login clicked');
+      const useremail=document.querySelector('.login-email').value;
+      const userpassword=document.querySelector('.login-password').value;
+      signInWithEmailAndPassword(auth,useremail,userpassword).then((userCredential)=>{
+               
+               location.replace('icoder.html');
+         }).catch((error)=>{
+            const errCode=error.code;
+            const errMessage=error.message;
+           const alertbox= document.querySelector('#login-alert');
+         
+            alertbox.style.visibility='visible';
+            alertbox.style.maxHeight='max-content';
+            document.querySelector('#err-message-login').innerHTML="<strong>Err! </strong>"+errMessage;
+          })
+    })
+    document.querySelector('.signup-submit').addEventListener('click',e=>{
+      e.preventDefault();
+      console.log('sign up clicked');
+      const alertbox= document.querySelector('#signup-alert');
+      const pass=document.querySelector('#pass1');
+      const pass1=document.querySelector('#pass2');
+      const cf_username=document.querySelector('.cfusername');
+      const cc_username=document.querySelector('.ccusername');
+      const email=document.querySelector('.user_email');
+      if(email.value==null || email.value==""){
+        alertbox.style.visibility='visible';
+        alertbox.style.maxHeight='max-content';
+        document.querySelector('#err-message-signup').innerHTML="<strong>Err! </strong>"+"Invalid email";
+      }
+      else if(pass.value==null || pass.value==""){
+        alertbox.style.visibility='visible';
+        alertbox.style.maxHeight='max-content';
+        document.querySelector('#err-message-signup').innerHTML="<strong>Err! </strong>"+"Invalid password";
+      }
+     else if(pass.value!=pass1.value){
+        alertbox.style.visibility='visible';
+        alertbox.style.maxHeight='max-content';
+        document.querySelector('#err-message-signup').innerHTML="<strong>Err! </strong>"+"passwords didn't match!";
+      }
+      else if((cf_username.value==null)&&(cc_username.value==null)){
+            alertbox.style.visibility='visible';
+            alertbox.style.maxHeight='max-content';
+            document.querySelector('#err-message-signup').innerHTML="Please provide atleast one username to continue..";
+          }
+      else{
+            console.log(email.value+" and "+pass.value);
+              createUserWithEmailAndPassword(auth,email.value,pass.value).then(cred=>{    
+                  const user = auth.currentUser;
+                      set(ref(db,'users/'+getemail(email.value)+"/"+"userData"),{
+                         email:email.value,
+                         cf:cf_username.value,
+                         cc:cc_username.value,
+                         password:pass.value,
+                       }); resetform();     
+                }).catch((error)=>{
+                  const errCode=error.code;
+                  const errMessage=error.message;
+                  alertbox.style.visibility='visible';
+                  alertbox.style.maxHeight='max-content';
+                  document.querySelector('#err-message-signup').innerHTML="<strong>Err! </strong>"+errMessage;
+                });
+                location.replace('icoder.html');
+          }
+      
+    })  
+  </script>
+
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
+</html>

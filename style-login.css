@@ -1,0 +1,65 @@
+body {
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    background-repeat: no-repeat;
+    background-size: cover;    
+}
+.navbar{background-color: #0093E9;}
+.form-inline{margin-right: 30px;display: flex;}
+.form-control{display: flexbox;}
+.btn-outline-success{display: flexbox;}
+.input-group{display: flexbox;margin-right: 30px;}
+.navbar-brand{margin-left: 30px;}
+.content-container{
+
+position: fixed;
+top: 70px;
+height: 90vh;
+width: 100%;
+padding-left: 1%;
+padding-right: 1%;
+display: block;
+}
+.ad-container-left{float: left;width: 35%;height: 80vh;}
+.signup-container{float: left;width: 30%;height: 80vh;text-align: center;margin-top: 5%;}
+.ad-container-right{float: left;width: 35%;height: 80vh;}
+.form-group {text-align: center;}
+.form-group .input-group{width: 80%;margin-left: 10%;}
+.form-group .input-group:first-of-type{margin-top: 5%;}
+.form-group .input-group:not(:first-of-type){margin-top: 2%;}
+.signup-submit{padding-left: 20px;padding-right: 20px;padding-top: 3px;padding-bottom: 3px;font-weight: 700;max-width: 200px;margin-left: 25%;margin-top: 2%;}
+.signup-container form{background-color: #00a2ff;
+background-image: linear-gradient(160deg, #00a2ff 0%, #5dc1b5 100%);
+border-radius: 7px;
+padding-bottom: 10%;
+padding-top: 10%;
+border: none;
+text-align: center;  
+}
+h2{color: white;}
+@media (max-width:600px){
+.content-container{
+
+position: fixed;
+top: 100px;
+height: 90vh;
+width: 100%;
+padding-left: 1%;
+padding-right: 1%;
+display: block;
+}
+.ad-container-left{float: left;width: 15%;height: 80vh;}
+.signup-container{float: left;width: 60%;height: 80vh;text-align: center;margin-top: 5%;}
+.ad-container-right{float: left;width: 15%;height: 80vh;}
+.signup-submit{padding-left: 5px;padding-right: 5px;padding-top: 3px;padding-bottom: 3px;font-weight: 600;max-width: 180px;margin-left: 15%;margin-top: 2%;}
+}
+@media (max-width:900px){
+.ad-container-left{float: left;width: 25%;height: 80vh;}
+.signup-container{float: left;width: 50%;height: 80vh;text-align: center;margin-top: 5%;}
+.ad-container-right{float: left;width: 25%;height: 80vh;}
+
+}
+.btn-outline-dark{font-weight: 600;}
+#login-alert{max-height: 0px;visibility: hidden;}
+#signup-alert{max-height: 0px;visibility: hidden;}
+
