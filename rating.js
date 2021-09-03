@@ -471,7 +471,7 @@ function plotUser(){
     Plotly.newPlot('performance', dataline,layout1,config);
     Plotly.newPlot('solved-today', dataToday,layout2,config);
 }
-function deluser(){
+function delUser(){
     e.preventDefault();
     if(users.length>=1){
         users.pop();
