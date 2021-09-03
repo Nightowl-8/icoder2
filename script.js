@@ -5,7 +5,21 @@ var apiURL='https://codeforces.com/api/';
  var allProblemList= new Map();
  var unsolvedProblemList=[];
  var unsolvedHTML="<table>";
-var cfhandle="";
+ var compareHTML=`
+ <div class="input-group mb-3" style="width: 50%;margin:0 auto;">
+ <input type="text" class="form-control" id="user-handle" placeholder="Codeforces handle" aria-label="Recipient's username" aria-describedby="basic-addon2">
+ <div class="input-group-append">
+   <button class="btn btn-success" id="user-submit" type="button" onclick="plotUser()">Compare</button>
+   <button class="btn btn-danger" id="user-delete" type="button" onclick="delUser()">Remove last</button>
+ </div>
+</div>
+<div class="graph" id="rating" style="background: none;"></div>
+<div class="graph" id="performance" style="background: none;"></div>
+<div class="graph" id="total-tried" style="background: none;"></div>
+<div class="graph" id="total-solved" style="background: none;"></div>
+<div class="graph" id="total-unsolved" style="background: none;"></div>
+<div class="graph" id="solved-today" style="background: none;"></div>
+ `;
 function fillcfhandle(){
     cfhandle= prompt('Enter your cf handle');
 }
@@ -78,6 +92,9 @@ function showContent(div){
    }
    else if(id=='unsolved'){
        area.innerHTML=unsolvedHTML;
+   }
+   else if(id=='compare'){
+       area.innerHTML=compareHTML;
    }
 }
     $(document).ready(function(){

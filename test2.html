@@ -77,36 +77,27 @@
              <div style="background-color: red;border-radius: 3px;padding-left: 2px;padding-right: 2px;height: 15px;width: max-content; display: flexbox; float: right;margin-left: 10px;font-size: 10px;color:white;font-weight: 500;border: none;text-align: center;align-self: center;align-items: center;" id="no-of-unsolved">0</div>
            </a>
            <a onclick="showContent(this)" id="compare">Compare</a>
+           <a onclick="showContent(this)" id="mystats">My stats</a>
           </div>
           <div class="content" style="border-radius: 5px;">
+            <div class="input-group mb-3" style="width: 50%;margin:0 auto;">
+                <input type="text" class="form-control" id="user-handle" placeholder="Codeforces handle" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-success" id="user-submit" type="button">Compare</button>
+                  <button class="btn btn-danger" id="user-delete" type="button">Remove last</button>
+                </div>
+              </div>
+            <div class="graph" id="rating" style="background: none;"></div>
+            <div class="graph" id="performance" style="background: none;"></div>
+            <div class="graph" id="total-tried" style="background: none;"></div>
+            <div class="graph" id="total-solved" style="background: none;"></div>
+            <div class="graph" id="total-unsolved" style="background: none;"></div>
+            <div class="graph" id="solved-today" style="background: none;"></div>
+           
            
           
           </div>  
        </div> 
-       <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
-        import { getDatabase,ref,set,onValue,child,get,push,onChildAdded, onChildChanged, onChildRemoved } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js";
-        import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword , updateProfile, updateEmail, updatePassword,sendEmailVerification,sendPasswordResetEmail,deleteUser,reauthenticateWithCredential,signOut} from "https://www.gstatic.com/firebasejs/9.0.1/firebase-auth.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyB-Sqki-JHIblUdA17Vx_BW_FNQ3MVFsqQ",
-          authDomain: "icoder-53c49.firebaseapp.com",
-          projectId: "icoder-53c49",
-          storageBucket: "icoder-53c49.appspot.com",
-          messagingSenderId: "865545154128",
-          appId: "1:865545154128:web:ee71656648a4771628ab55"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db= getDatabase(app);
-        const auth = getAuth(app);
-       
-      </script>
       <script>
         var cfhandle="";
         var  users=[];
@@ -119,7 +110,6 @@
        <script src="script.js"></script>
        <script src="rating.js"></script>
        <script src="today.js"></script>
-       
  </body>
 
 </html>

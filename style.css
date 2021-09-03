@@ -294,3 +294,6 @@ background-color: #fff;
 .problem-index{padding-left: 30px;}
 .problem-name{padding-left: 0px;}
 .problem-solve{max-width: 200px;text-align: center;background-color: rgb(110, 107, 107);color:white;border-radius: 5px;padding: 10px;cursor: pointer;}
+.graph:not(:first-of-type){
+  margin-top: 5%;
+}
