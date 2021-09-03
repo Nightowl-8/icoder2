@@ -472,7 +472,7 @@ function plotUser(){
     Plotly.newPlot('solved-today', dataToday,layout2,config);
 }
 function delUser(){
-    
+    var ccccc=0;
     if(users.length>=1){
         users.pop();
     userRating.pop();
